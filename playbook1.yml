@@ -14,8 +14,8 @@
   - name: install git
     yum: name=git state=present
   - name: get repo
-    git: repo=https://github.com/imanojk4/myansibl.git dest=/usr/share/tomcat/webapps
+    git: repo=https://github.com/Sonal0409/dockerdemo.git dest=/tmp/gitrepo
   - name: Build Dockerfile
-    command: chdir=/usr/share/tomcat/webapps docker build -t addressbook:ansible .
+    command: chdir=/tmp/gitrepo docker build -t addressbook:ansible .
   - name: run Image
     command: docker run -itd -P addressbook:ansible
