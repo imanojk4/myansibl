@@ -14,9 +14,9 @@
   - name: install git
     yum: name=git state=present
   - name: get repo
-    git: repo=https://github.com/imanojk4/myansibl.git dest=/tmp/gitrepo
+    git: repo=https://github.com/imanojk4/myansibl.git dest=/var/manoj
   - name: Build Dockerfile
-    command: chdir=/tmp/gitrepo docker build -t addressbook:ansible .
+    command: chdir=/var/manoj docker build -t addressbook:ansible .
   - name: run Image
     command: docker run -itd -P addressbook:ansible
   
