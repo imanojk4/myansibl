@@ -1,0 +1,20 @@
+pipeline{
+    agent any
+    stages{
+        stage('Clone repo'){
+            steps{
+            git branch: 'main', url: 'https://github.com/imanojk4/myansibl.git'
+            }
+        }
+        stage('execute playbook'){
+            steps{
+                   ansiblePlaybook credentialsId: 'ansibleid', disableHostKeyChecking: true, installation: 'ansible', inventory: 'dev.inv', playbook: 'playbook1.yml'
+            }
+        }
+            
+        }           
+        
+    }
+
+
+
