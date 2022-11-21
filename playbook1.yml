@@ -1,4 +1,3 @@
----
 - hosts: webservers
   become: true
   become_user: root
@@ -7,18 +6,14 @@
     yum: name=tomcat state=present
   - name: start tomcat
     service: name=tomcat state=started
-  - name: install docker
-    yum: name=docker state=present
-  - name: start docker
-    service: name=docker state=started
-  - name: install git
-    yum: name=git state=present
-  - name: get repo
-    git: repo=https://github.com/imanojk4/myansibl.git dest=/tmp/gitrepo
-  - name: Build Dockerfile
-    command: chdir=/tmp/gitrepo docker build -t addressbook:ansible .
-  - name: run Image
-    command: docker run -itd -P addressbook:ansible
+  - name: deploy war file
+    get_url:
+     url=https://github.com/imanojk4/myansibl/blob/main/addressbook%20.war
+     dest=/usr/share/tomcat/webapps
+    notify: restart tomcat
+  handlers:
+   - name: restart tomcat
+     service: name=tomcat state=restarted
   
   
   
